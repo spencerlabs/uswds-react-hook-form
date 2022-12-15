@@ -1,0 +1,11 @@
+integrations:
+- integrations/*
+- integrations/**/*
+
+packages:
+- packages/*
+- packages/**/*
+
+plugins:
+- plugins/*
+- plugins/**/*
