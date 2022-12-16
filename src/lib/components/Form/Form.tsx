@@ -63,6 +63,6 @@ const FormComponent = forwardRef(FormInner) as <
   props: FormProps<TFieldValues> & React.RefAttributes<HTMLFormElement>
 ) => React.ReactElement | null
 
-const Form = Object.assign(FormComponent)
+const Form = Object.assign(FormComponent, {})
 
 export default Form
