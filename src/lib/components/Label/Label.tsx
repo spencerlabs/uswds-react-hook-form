@@ -1,14 +1,15 @@
-import { classNames } from '../../../utils'
+import { classNames } from '../../utils'
 
 export interface LabelProps extends React.ComponentPropsWithoutRef<'label'> {
-  error?: boolean
-  name: string
+  /** Id of the corresponding field */
+  htmlFor: string
 }
 
-const Label = ({ children, className, error, name, ...rest }: LabelProps) => {
+const Label = ({ children, className, ...rest }: LabelProps) => {
+  const error = false
+
   return (
     <label
-      htmlFor={name}
       {...rest}
       className={classNames(
         'usa-label',

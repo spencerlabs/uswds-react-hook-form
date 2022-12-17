@@ -8,7 +8,8 @@ import {
   UseFormReturn,
 } from 'react-hook-form'
 
-import { classNames } from '../../../utils'
+import { useFieldId } from '../../hooks'
+import { classNames } from '../../utils'
 
 interface FormProps<TFieldValues extends FieldValues>
   extends Omit<React.ComponentPropsWithRef<'form'>, 'onSubmit'> {
@@ -34,6 +35,7 @@ function FormInner<TFieldValues extends FieldValues>(
     className,
     config,
     formMethods: propFormMethods,
+    id,
     large,
     onSubmit,
     ...rest
@@ -43,26 +45,31 @@ function FormInner<TFieldValues extends FieldValues>(
   const hookFormMethods = useForm<TFieldValues>(config)
   const formMethods = propFormMethods || hookFormMethods
 
+  const formId = useFieldId(id)
+
   return (
-    <form
-      ref={ref}
-      {...rest}
-      className={classNames('usa-form', large && 'usa-form--large', className)}
-      onSubmit={formMethods.handleSubmit((data, event) =>
-        onSubmit?.(data, event)
-      )}
-    >
-      <FormProvider {...formMethods}>{children}</FormProvider>
-    </form>
+    <FormProvider {...formMethods}>
+      <form
+        ref={ref}
+        {...rest}
+        id={formId}
+        className={classNames(
+          'usa-form',
+          large && 'usa-form--large',
+          className
+        )}
+        onSubmit={formMethods.handleSubmit((data, event) =>
+          onSubmit?.(data, event)
+        )}
+      >
+        {children}
+      </form>
+    </FormProvider>
   )
 }
 
-const FormComponent = forwardRef(FormInner) as <
-  TFieldValues extends FieldValues
->(
+const Form = forwardRef(FormInner) as <TFieldValues extends FieldValues>(
   props: FormProps<TFieldValues> & React.RefAttributes<HTMLFormElement>
 ) => React.ReactElement | null
-
-const Form = Object.assign(FormComponent, {})
 
 export default Form
