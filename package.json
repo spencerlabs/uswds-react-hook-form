@@ -1,5 +1,5 @@
 {
-  "name": "uswds-react-hook-form",
+  "name": "@spencercreative/uswds-react-hook-form",
   "version": "0.1.0",
   "repository": {
     "type": "git",
@@ -17,49 +17,43 @@
     ".": {
       "import": "./dist/uswds-react-hook-form.es.js",
       "require": "./dist/uswds-react-hook-form.umd.js"
-    }
+    },
+    "./styles": "./dist/css",
+    "./styles/*": "./dist/css/*"
   },
   "scripts": {
     "dev": "vite",
-    "compile-sass": "sass --style=compressed --load-path=node_modules/@uswds --load-path=node_modules/@uswds/uswds/packages --no-source-map src/uswds-forms.scss:dist/uswds-forms.css",
-    "build": "tsc && vite build && yarn compile-sass",
+    "build": "tsc && vite build && yarn build:styles",
+    "build:styles": "sass --style=compressed --load-path=node_modules/@uswds --load-path=node_modules/@uswds/uswds/packages --no-source-map src/uswds-forms.scss:dist/css/uswds-forms.css",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@redwoodjs/forms": "^3.7.1",
     "@uswds/uswds": "^3.3.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-hook-form": "^7.40.0",
-    "uuid": "^9.0.0"
+    "react-hook-form": "^7.40.0"
   },
   "peerDependencies": {
-    "@uswds/uswds": "3.x",
     "react": "^16.8.0 || 17.x || 18.x",
     "react-dom": "^16.8.0 || 17.x || 18.x"
   },
   "devDependencies": {
+    "@spencercreative/eslint-config": "^1.0.0",
     "@types/node": "^18.11.15",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.9",
     "@types/uswds__uswds": "^3.3.0",
     "@types/uuid": "^9.0.0",
-    "@typescript-eslint/eslint-plugin": "^5.46.1",
-    "@typescript-eslint/parser": "^5.46.1",
     "@vitejs/plugin-react": "^3.0.0",
-    "eslint": "^8.29.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-import-resolver-typescript": "^3.5.2",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-jest-dom": "^4.0.3",
-    "eslint-plugin-jsx-a11y": "^6.6.1",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-react": "^7.31.11",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "prettier": "^2.8.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "sass": "^1.56.2",
     "typescript": "^4.9.4",
     "vite": "^4.0.1",
     "vite-plugin-dts": "^1.7.1"
+  },
+  "eslintConfig": {
+    "extends": "@spencercreative/eslint-config",
+    "root": true
   },
   "packageManager": "yarn@3.3.0"
 }

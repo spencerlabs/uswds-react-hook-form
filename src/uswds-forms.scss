@@ -1,6 +1,8 @@
 @use 'uswds-core' with (
   $theme-show-notifications: false,
-  $theme-font-path: '~@uswds/uswds/fonts'
+  $theme-font-path: '@uswds/uswds/fonts'
 );
 
+@forward 'uswds-global';
 @forward 'uswds-form-controls';
+@forward 'uswds-helpers';
