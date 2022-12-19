@@ -48,7 +48,7 @@ const InputField = forwardRef(
       width,
       ...rest
     }: InputFieldProps,
-    ref
+    ref: React.Ref<HTMLInputElement | null>
   ) => {
     const inputRef = useRef<HTMLInputElement>(null)
     useImperativeHandle(ref, () => inputRef.current)

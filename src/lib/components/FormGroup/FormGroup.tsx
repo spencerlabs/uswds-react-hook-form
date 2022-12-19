@@ -8,7 +8,7 @@ import { ConditionalWrapper } from '../ConditionalWrapper'
 
 export interface BaseFieldProps {
   characterCount?: boolean
-  hint?: string
+  hint?: React.ReactNode
   label: React.ReactNode
   name: string
 }
