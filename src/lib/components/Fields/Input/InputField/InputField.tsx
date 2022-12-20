@@ -7,32 +7,60 @@ import {
 } from 'react'
 
 import inputMask from '@uswds/uswds/js/usa-input-mask'
+import { RegisterOptions } from 'react-hook-form'
 
+import { useRegister } from '../../../../hooks'
 import { classNames } from '../../../../utils'
 import { ConditionalWrapper } from '../../../ConditionalWrapper'
 
+const INPUT_TYPES = [
+  'button',
+  'color',
+  'date',
+  'datetime-local',
+  'email',
+  'file',
+  'hidden',
+  'image',
+  'month',
+  'number',
+  'password',
+  'radio',
+  'range',
+  'reset',
+  'search',
+  'submit',
+  'tel',
+  'text',
+  'time',
+  'url',
+  'week',
+] as const
+
+type InputType = typeof INPUT_TYPES[number]
+
+export interface FieldProps<
+  Element extends
+    | HTMLTextAreaElement
+    | HTMLSelectElement
+    | HTMLInputElement = HTMLInputElement
+> {
+  name: string
+  validation?: RegisterOptions
+  type?: string
+  onBlur?: React.FocusEventHandler<Element>
+  onChange?: React.ChangeEventHandler<Element>
+}
+
 export interface InputFieldProps
-  extends Omit<React.ComponentPropsWithRef<'input'>, 'prefix'> {
+  extends Omit<FieldProps<HTMLInputElement>, 'type'>,
+    Omit<React.ComponentPropsWithRef<'input'>, 'name' | 'type' | 'prefix'> {
   characterCount?: boolean
   error?: boolean
   hint?: boolean
-  name: string
   prefix?: React.ReactNode
   suffix?: React.ReactNode
-  type?:
-    | 'color'
-    | 'email'
-    | 'hidden'
-    | 'image'
-    | 'month'
-    | 'number'
-    | 'password'
-    | 'reset'
-    | 'search'
-    | 'tel'
-    | 'text'
-    | 'url'
-    | 'week'
+  type?: InputType
   width?: '2xs' | 'xs' | 'sm' | 'small' | 'md' | 'medium' | 'lg' | 'xl' | '2xl'
 }
 
@@ -43,8 +71,13 @@ const InputField = forwardRef(
       className,
       error,
       hint,
+      name,
+      onBlur,
+      onChange,
       prefix,
       suffix,
+      type = 'text',
+      validation,
       width,
       ...rest
     }: InputFieldProps,
@@ -76,6 +109,17 @@ const InputField = forwardRef(
       }
     }, [rest.placeholder, rest.pattern])
 
+    const useRegisterReturn = useRegister(
+      {
+        name,
+        validation,
+        onBlur,
+        onChange,
+        type,
+      },
+      ref
+    )
+
     return (
       <ConditionalWrapper
         if={prefix || suffix ? true : false}
@@ -95,7 +139,6 @@ const InputField = forwardRef(
         )}
 
         <input
-          ref={inputRef}
           {...rest}
           className={classNames(
             'usa-input',
@@ -105,6 +148,7 @@ const InputField = forwardRef(
             rest.placeholder && rest.pattern && 'usa-masked',
             className
           )}
+          type={type}
           aria-describedby={
             canCountCharacters || error || hint
               ? classNames(
@@ -114,6 +158,7 @@ const InputField = forwardRef(
                 )
               : undefined
           }
+          {...useRegisterReturn}
         />
 
         {suffix && (

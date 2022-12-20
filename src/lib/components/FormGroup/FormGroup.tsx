@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 
 import { characterCount as uswdsCharacterCount } from '@uswds/uswds/js'
+import { RegisterOptions } from 'react-hook-form'
 
 import { FieldError, Hint, Label } from '..'
 import { classNames } from '../../utils'
@@ -11,6 +12,7 @@ export interface BaseFieldProps {
   hint?: React.ReactNode
   label: React.ReactNode
   name: string
+  validation?: RegisterOptions
 }
 
 interface FormGroupProps
