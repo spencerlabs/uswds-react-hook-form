@@ -1,11 +1,7 @@
-integrations:
-- integrations/*
-- integrations/**/*
+api:
+- api/*
+- api/**/*
 
-packages:
-- packages/*
-- packages/**/*
-
-plugins:
-- plugins/*
-- plugins/**/*
+web:
+- web/*
+- web/**/*
