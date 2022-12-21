@@ -1,4 +1,4 @@
-import { classNames } from '../../utils'
+import { classNames } from 'lib/utils'
 
 export interface LegendProps extends React.ComponentPropsWithoutRef<'legend'> {
   error?: boolean

@@ -1,4 +1,5 @@
-import { classNames } from '../../utils'
+import { classNames } from 'lib/utils'
+
 import { Legend } from '../Legend'
 
 export interface FieldsetProps

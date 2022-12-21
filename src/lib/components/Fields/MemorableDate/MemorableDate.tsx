@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react'
 
-import { Hint, Input, Select } from '../..'
-import { useFieldId } from '../../../hooks'
-import Fieldset, { FieldsetProps } from '../../Fieldset/Fieldset'
+import { RegisterOptions } from 'react-hook-form'
 
-interface DateProps extends Omit<FieldsetProps, 'children' | 'onChange'> {
+import Fieldset, { FieldsetProps } from 'components/Fieldset/Fieldset'
+import { Hint, Input, Select } from 'lib/components'
+import { useFieldId } from 'lib/hooks'
+
+interface MemorableDateProps
+  extends Omit<FieldsetProps, 'children' | 'onChange'> {
   defaultValues?: {
     month?: number
     day?: number
@@ -19,9 +22,14 @@ interface DateProps extends Omit<FieldsetProps, 'children' | 'onChange'> {
     day?: React.Ref<HTMLInputElement>
     year?: React.Ref<HTMLInputElement>
   }
+  validations?: {
+    month?: RegisterOptions
+    day?: RegisterOptions
+    year?: RegisterOptions
+  }
 }
 
-const Date = ({
+const MemorableDate = ({
   defaultValues,
   error,
   hint,
@@ -29,8 +37,9 @@ const Date = ({
   onChange,
   readOnly,
   refs,
+  validations,
   ...rest
-}: DateProps) => {
+}: MemorableDateProps) => {
   const [dateValue, setDateValue] = useState({
     month: undefined,
     day: undefined,
@@ -64,8 +73,9 @@ const Date = ({
           className="usa-form-group--month"
           label="Month"
           name={`${name}--month`}
+          validation={{ ...validations?.month, valueAsNumber: true }}
         >
-          <option value={undefined}>- Select -</option>
+          <option value="">- Select -</option>
           <option value="1">01 - January</option>
           <option value="2">02 - February</option>
           <option value="3">03 - March</option>
@@ -79,6 +89,7 @@ const Date = ({
           <option value="11">11 - November</option>
           <option value="12">12 - December</option>
         </Select>
+
         <Input
           ref={refs?.day}
           {...sharedProps}
@@ -92,6 +103,7 @@ const Date = ({
             onDateChange('day', value ? parseInt(e.target.value) : undefined)
           }}
           pattern="[0-9]*"
+          validation={{ ...validations?.day, valueAsNumber: true }}
         />
 
         <Input
@@ -108,10 +120,11 @@ const Date = ({
             onDateChange('year', value ? parseInt(e.target.value) : undefined)
           }}
           pattern="[0-9]*"
+          validation={{ ...validations?.year, valueAsNumber: true }}
         />
       </div>
     </Fieldset>
   )
 }
 
-export default Date
+export default MemorableDate

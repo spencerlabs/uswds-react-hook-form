@@ -1,16 +1,16 @@
-import { classNames } from '../../utils'
+import { classNames } from 'lib/utils'
 
-export interface FieldErrorProps
+export interface FormErrorProps
   extends Omit<React.ComponentPropsWithoutRef<'span'>, 'id'> {
   fieldId: string
 }
 
-const FieldError = ({
+const FormError = ({
   children,
   className,
   fieldId,
   ...rest
-}: FieldErrorProps) => {
+}: FormErrorProps) => {
   return (
     <span
       {...rest}
@@ -23,4 +23,4 @@ const FieldError = ({
   )
 }
 
-export default FieldError
+export default FormError

@@ -6,9 +6,9 @@ import {
   useState,
 } from 'react'
 
-import { useRegister } from '../../../../hooks'
-import { classNames } from '../../../../utils'
-import type { FieldProps } from '../../Input/InputField/InputField'
+import type { FieldProps } from 'components/Fields/Input/InputField/InputField'
+import { useErrors, useRegister } from 'lib/hooks'
+import { classNames } from 'lib/utils'
 
 export interface TextAreaFieldProps
   extends Omit<FieldProps<HTMLTextAreaElement>, 'type'>,
@@ -24,7 +24,7 @@ const TextAreaField = forwardRef(
     {
       characterCount,
       className,
-      error,
+      error: passedError,
       hint,
       name,
       onBlur,
@@ -49,6 +49,10 @@ const TextAreaField = forwardRef(
       },
       ref
     )
+
+    const formError = useErrors(name)
+
+    const error = passedError || !!formError
 
     useEffect(() => {
       const textareaEl = textareaRef.current

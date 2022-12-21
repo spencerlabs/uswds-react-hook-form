@@ -12,6 +12,13 @@ export default defineConfig({
       insertTypesEntry: true,
     }),
   ],
+  resolve: {
+    alias: {
+      src: resolve(__dirname, './src'),
+      lib: resolve(__dirname, './src/lib'),
+      components: resolve(__dirname, './src/lib/components'),
+    },
+  },
   build: {
     lib: {
       entry: resolve(__dirname, 'src/lib/index.ts'),

@@ -1,11 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 import { characterCount as uswdsCharacterCount } from '@uswds/uswds/js'
 import { RegisterOptions } from 'react-hook-form'
 
-import { FieldError, Hint, Label } from '..'
-import { classNames } from '../../utils'
-import { ConditionalWrapper } from '../ConditionalWrapper'
+import { ConditionalWrapper } from 'components/ConditionalWrapper'
+import { Form, Hint, Label } from 'lib/components'
+import { useErrors } from 'lib/hooks'
+import { classNames } from 'lib/utils'
 
 export interface BaseFieldProps {
   characterCount?: boolean
@@ -28,9 +29,11 @@ const FormGroup = ({
   fieldId,
   hint,
   label,
+  name,
 }: FormGroupProps) => {
-  const [error, _setError] = useState('')
   const characterCountRef = useRef<HTMLDivElement>(null)
+
+  const error = useErrors(name)
 
   useEffect(() => {
     const characterCountEl = characterCountRef.current
@@ -62,9 +65,9 @@ const FormGroup = ({
       >
         <Label htmlFor={fieldId}>{label}</Label>
 
-        {hint && <Hint fieldId={fieldId}>{hint}</Hint>}
+        {error && <Form.Error fieldId={fieldId}>{error}</Form.Error>}
 
-        {error && <FieldError fieldId={fieldId}>{error}</FieldError>}
+        {hint && <Hint fieldId={fieldId}>{hint}</Hint>}
 
         {/* Form field */}
         {children}

@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 
 import dateRangePicker from '@uswds/uswds/js/usa-date-range-picker'
+import { RegisterOptions } from 'react-hook-form'
 
-import { DatePicker } from '..'
+import { DatePicker } from 'lib/components'
 
 interface DateRangePickerProps {
   /** Default values for the date fields */
@@ -15,6 +16,8 @@ interface DateRangePickerProps {
   }
   /** Label values for the date fields */
   labels?: { start?: string; end?: string }
+  maxDate?: string
+  minDate?: string
   name: string
   onChange?: (value: { start?: string; end?: string }) => void
   readOnly?: boolean
@@ -23,6 +26,10 @@ interface DateRangePickerProps {
     start?: React.Ref<HTMLInputElement>
     end?: React.Ref<HTMLInputElement>
   }
+  validations?: {
+    start?: RegisterOptions
+    end?: RegisterOptions
+  }
 }
 
 const DateRangePicker = ({
@@ -30,10 +37,13 @@ const DateRangePicker = ({
   disabled,
   hints,
   labels,
+  maxDate,
+  minDate,
   name,
   onChange,
   readOnly,
   refs,
+  validations,
 }: DateRangePickerProps) => {
   const [dateValues, setDateValues] = useState({
     start: undefined,
@@ -69,7 +79,12 @@ const DateRangePicker = ({
   }, [dateValues, onChange])
 
   return (
-    <div ref={containerRef} className="usa-date-range-picker">
+    <div
+      ref={containerRef}
+      data-max-date={maxDate}
+      data-min-date={minDate}
+      className="usa-date-range-picker"
+    >
       <DatePicker
         ref={refs?.start}
         {...sharedProps}
@@ -78,6 +93,7 @@ const DateRangePicker = ({
         label={labels?.start || 'Start date'}
         name={`${name}--start`}
         onChange={(e) => onDateChange('start', e.target.value)}
+        validation={validations?.start}
       />
       <DatePicker
         ref={refs?.end}
@@ -87,6 +103,7 @@ const DateRangePicker = ({
         label={labels?.end || 'End date'}
         name={`${name}--end`}
         onChange={(e) => onDateChange('end', e.target.value)}
+        validation={validations?.end}
       />
     </div>
   )

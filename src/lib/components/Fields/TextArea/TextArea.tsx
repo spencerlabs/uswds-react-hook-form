@@ -1,15 +1,15 @@
 import { forwardRef } from 'react'
 
-import { useFieldId } from '../../../hooks'
-import { BaseFieldProps, FormGroup } from '../../FormGroup'
+import { BaseFieldProps, FormGroup } from 'components/Form/FormGroup'
+import { useFieldId } from 'lib/hooks'
 
 import Field, { TextAreaFieldProps } from './TextAreaField/TextAreaField'
 
-interface TextareaGroupProps
+interface TextAreaGroupProps
   extends Omit<TextAreaFieldProps, 'hint'>,
     BaseFieldProps {}
 
-const TextAreaComponent = forwardRef<HTMLTextAreaElement, TextareaGroupProps>(
+const TextAreaComponent = forwardRef<HTMLTextAreaElement, TextAreaGroupProps>(
   ({ characterCount, hint, id, label, ...rest }, ref) => {
     const fieldId = useFieldId(id)
 
@@ -26,7 +26,7 @@ const TextAreaComponent = forwardRef<HTMLTextAreaElement, TextareaGroupProps>(
           {...rest}
           id={fieldId}
           characterCount={characterCount}
-          hint={hint ? true : false}
+          hint={!!hint}
         />
       </FormGroup>
     )

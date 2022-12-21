@@ -1,7 +1,7 @@
 import { forwardRef } from 'react'
 
-import { useFieldId } from '../../../hooks'
-import { BaseFieldProps, FormGroup } from '../../FormGroup'
+import { BaseFieldProps, FormGroup } from 'components/Form/FormGroup'
+import { useFieldId } from 'lib/hooks'
 
 import Field, { SelectFieldProps } from './SelectField/SelectField'
 
@@ -21,7 +21,7 @@ const SelectComponent = forwardRef<HTMLSelectElement, SelectGroupProps>(
         hint={hint}
         name={rest.name}
       >
-        <Field ref={ref} {...rest} id={fieldId} hint={hint ? true : false} />
+        <Field ref={ref} {...rest} id={fieldId} hint={!!hint} />
       </FormGroup>
     )
   }

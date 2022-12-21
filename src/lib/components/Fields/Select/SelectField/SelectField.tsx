@@ -1,26 +1,29 @@
 import { forwardRef } from 'react'
 
-import { useRegister } from '../../../../hooks'
-import { classNames } from '../../../../utils'
-import type { FieldProps } from '../../Input/InputField/InputField'
+import type { FieldProps } from 'components/Fields/Input/InputField/InputField'
+import { useErrors, useRegister } from 'lib/hooks'
+import { classNames } from 'lib/utils'
 
 export interface SelectFieldProps
   extends Omit<FieldProps<HTMLSelectElement>, 'type'>,
     Omit<React.ComponentPropsWithRef<'select'>, 'name'> {
   error?: boolean
   hint?: boolean
+  showSelect?: boolean | string
   width?: '2xs' | 'xs' | 'sm' | 'small' | 'md' | 'medium' | 'lg' | 'xl' | '2xl'
 }
 
 const SelectField = forwardRef(
   (
     {
+      children,
       className,
-      error,
+      error: passedError,
       hint,
       name,
       onBlur,
       onChange,
+      showSelect,
       validation,
       width,
       ...rest
@@ -36,6 +39,10 @@ const SelectField = forwardRef(
       },
       ref
     )
+
+    const formError = useErrors(name)
+
+    const error = passedError || !!formError
 
     return (
       <select
@@ -55,7 +62,14 @@ const SelectField = forwardRef(
             : undefined
         }
         {...useRegisterReturn}
-      />
+      >
+        {showSelect && (
+          <option value="">
+            {typeof showSelect === 'string' ? showSelect : '- Select -'}
+          </option>
+        )}
+        {children}
+      </select>
     )
   }
 )

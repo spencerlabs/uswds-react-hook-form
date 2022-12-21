@@ -1,5 +1,7 @@
 import { forwardRef, ForwardedRef } from 'react'
 
+import { useFieldId } from 'lib/hooks'
+import { classNames } from 'lib/utils'
 import {
   useForm,
   FieldValues,
@@ -8,8 +10,8 @@ import {
   UseFormReturn,
 } from 'react-hook-form'
 
-import { useFieldId } from '../../hooks'
-import { classNames } from '../../utils'
+import { FormError as Error } from './FormError'
+import { FormGroup as Group } from './FormGroup'
 
 interface FormProps<TFieldValues extends FieldValues>
   extends Omit<React.ComponentPropsWithRef<'form'>, 'onSubmit'> {
@@ -68,8 +70,12 @@ function FormInner<TFieldValues extends FieldValues>(
   )
 }
 
-const Form = forwardRef(FormInner) as <TFieldValues extends FieldValues>(
+const FormComponent = forwardRef(FormInner) as <
+  TFieldValues extends FieldValues
+>(
   props: FormProps<TFieldValues> & React.RefAttributes<HTMLFormElement>
 ) => React.ReactElement | null
+
+const Form = Object.assign(FormComponent, { Error, Group })
 
 export default Form

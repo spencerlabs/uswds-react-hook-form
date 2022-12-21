@@ -1,4 +1,4 @@
-import { classNames } from '../../utils'
+import { classNames } from 'lib/utils'
 
 export interface HintProps
   extends Omit<React.ComponentPropsWithoutRef<'div'>, 'id'> {

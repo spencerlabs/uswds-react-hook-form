@@ -3,7 +3,7 @@ import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react'
 import datePicker from '@uswds/uswds/js/usa-date-picker'
 import inputMask from '@uswds/uswds/js/usa-input-mask'
 
-import { Input } from '../..'
+import { Input } from 'lib/components'
 
 export interface DatePickerFieldProps
   extends Omit<React.ComponentPropsWithRef<'input'>, 'prefix' | 'type'> {
@@ -22,6 +22,7 @@ export interface DatePickerFieldProps
 const DatePickerField = forwardRef(
   (
     {
+      defaultValue,
       error,
       hint,
       maxDate,
@@ -74,6 +75,7 @@ const DatePickerField = forwardRef(
       <div
         ref={containerRef}
         className="usa-date-picker"
+        data-default-value={defaultValue}
         data-max-date={maxDate}
         data-min-date={minDate}
         data-range-date={rangeDate}

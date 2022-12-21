@@ -9,9 +9,9 @@ import {
 import inputMask from '@uswds/uswds/js/usa-input-mask'
 import { RegisterOptions } from 'react-hook-form'
 
-import { useRegister } from '../../../../hooks'
-import { classNames } from '../../../../utils'
-import { ConditionalWrapper } from '../../../ConditionalWrapper'
+import { ConditionalWrapper } from 'components/ConditionalWrapper'
+import { useErrors, useRegister } from 'lib/hooks'
+import { classNames } from 'lib/utils'
 
 const INPUT_TYPES = [
   'button',
@@ -69,7 +69,7 @@ const InputField = forwardRef(
     {
       characterCount,
       className,
-      error,
+      error: passedError,
       hint,
       name,
       onBlur,
@@ -87,6 +87,21 @@ const InputField = forwardRef(
     useImperativeHandle(ref, () => inputRef.current)
 
     const [canCountCharacters, setCanCountCharacters] = useState(false)
+
+    const useRegisterReturn = useRegister(
+      {
+        name,
+        validation,
+        onBlur,
+        onChange,
+        type,
+      },
+      ref
+    )
+
+    const formError = useErrors(name)
+
+    const error = passedError || !!formError
 
     useEffect(() => {
       const inputEl = inputRef.current
@@ -109,20 +124,9 @@ const InputField = forwardRef(
       }
     }, [rest.placeholder, rest.pattern])
 
-    const useRegisterReturn = useRegister(
-      {
-        name,
-        validation,
-        onBlur,
-        onChange,
-        type,
-      },
-      ref
-    )
-
     return (
       <ConditionalWrapper
-        if={prefix || suffix ? true : false}
+        if={!!(prefix || suffix)}
         with="div"
         wrapperProps={{
           className: classNames(

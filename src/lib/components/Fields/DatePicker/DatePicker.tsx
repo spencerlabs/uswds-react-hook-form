@@ -1,7 +1,7 @@
 import { forwardRef } from 'react'
 
-import { useFieldId } from '../../../hooks'
-import { BaseFieldProps, FormGroup } from '../../FormGroup'
+import { BaseFieldProps, FormGroup } from 'components/Form/FormGroup'
+import { useFieldId } from 'lib/hooks'
 
 import Field, { DatePickerFieldProps } from './DatePickerField/DatePickerField'
 
@@ -15,7 +15,7 @@ const DatePickerComponent = forwardRef<HTMLInputElement, DatePickerGroupProps>(
 
     return (
       <FormGroup fieldId={fieldId} label={label} hint={hint} name={rest.name}>
-        <Field ref={ref} {...rest} id={fieldId} hint={hint ? true : false} />
+        <Field ref={ref} {...rest} id={fieldId} hint={!!hint} />
       </FormGroup>
     )
   }

@@ -1,7 +1,7 @@
 import { forwardRef } from 'react'
 
-import { useFieldId } from '../../../hooks'
-import { BaseFieldProps, FormGroup } from '../../FormGroup'
+import { BaseFieldProps, FormGroup } from 'components/Form/FormGroup'
+import { useFieldId } from 'lib/hooks'
 
 import Field, { InputFieldProps } from './InputField/InputField'
 
@@ -26,7 +26,7 @@ const InputComponent = forwardRef<HTMLInputElement, InputGroupProps>(
           {...rest}
           id={fieldId}
           characterCount={characterCount}
-          hint={hint ? true : false}
+          hint={!!hint}
         />
       </FormGroup>
     )

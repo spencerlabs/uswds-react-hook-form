@@ -1,4 +1,4 @@
-import { classNames } from '../../utils'
+import { classNames } from 'lib/utils'
 
 export interface LabelProps extends React.ComponentPropsWithoutRef<'label'> {
   /** Id of the corresponding field */

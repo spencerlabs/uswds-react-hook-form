@@ -4,13 +4,17 @@ import comboBox from '@uswds/uswds/js/usa-combo-box'
 
 import SelectField, {
   SelectFieldProps,
-} from '../../Select/SelectField/SelectField'
+} from 'components/Fields/Select/SelectField/SelectField'
 
-export interface ComboBoxFieldProps extends SelectFieldProps {}
+export interface ComboBoxFieldProps
+  extends Omit<SelectFieldProps, 'showSelect'> {
+  /** The combo box will use this regular expression to filter the combo box options. */
+  filter?: string
+}
 
 const ComboBoxField = forwardRef(
   (
-    props: ComboBoxFieldProps,
+    { defaultValue, filter, placeholder, ...rest }: ComboBoxFieldProps,
     ref: React.ForwardedRef<HTMLSelectElement | null>
   ) => {
     const containerRef = useRef<HTMLDivElement | null>(null)
@@ -28,8 +32,14 @@ const ComboBoxField = forwardRef(
     })
 
     return (
-      <div ref={containerRef} className="usa-combo-box">
-        <SelectField ref={ref} {...props} />
+      <div
+        ref={containerRef}
+        className="usa-combo-box"
+        data-default-value={defaultValue}
+        data-filter={filter}
+        data-placeholder={placeholder}
+      >
+        <SelectField ref={ref} {...rest} />
       </div>
     )
   }
