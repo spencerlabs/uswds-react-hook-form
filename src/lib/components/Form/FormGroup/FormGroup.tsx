@@ -65,12 +65,12 @@ const FormGroup = ({
       >
         <Label htmlFor={fieldId}>{label}</Label>
 
-        {error && <Form.Error fieldId={fieldId}>{error}</Form.Error>}
-
         {hint && <Hint fieldId={fieldId}>{hint}</Hint>}
 
         {/* Form field */}
         {children}
+
+        {error && <Form.Error fieldId={fieldId}>{error}</Form.Error>}
       </div>
 
       {characterCount && (
