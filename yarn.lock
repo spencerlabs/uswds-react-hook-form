@@ -710,9 +710,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@spencercreative/eslint-config@npm:^1.0.0":
+"@spencerlabs/eslint-config@npm:^1.0.0":
   version: 1.0.0
-  resolution: "@spencercreative/eslint-config@npm:1.0.0"
+  resolution: "@spencerlabs/eslint-config@npm:1.0.0"
   dependencies:
     "@typescript-eslint/eslint-plugin": ^5.46.1
     "@typescript-eslint/parser": ^5.46.1
@@ -726,15 +726,15 @@ __metadata:
     eslint-plugin-react: ^7.31.11
     eslint-plugin-react-hooks: ^4.6.0
     prettier: ^2.8.1
-  checksum: 9f57b1b6f08e712cd628676fb084371fcb55b98a424f9840033518f7153d4a3a564f9b0fad1ab5dd77bd9b968436217e5d11005d13a9d962745c82655e2b2046
+  checksum: 78162cf78c85aac626531cf6d325bc95e70d072f664789d138463a153f4919e3c24d991d92fa7799bd95a1ffe8b7ec7e6f1401224628a0a9fe67ae28f04df96e
   languageName: node
   linkType: hard
 
-"@spencercreative/uswds-react-hook-form@workspace:.":
+"@spencerlabs/uswds-react-hook-form@workspace:.":
   version: 0.0.0-use.local
-  resolution: "@spencercreative/uswds-react-hook-form@workspace:."
+  resolution: "@spencerlabs/uswds-react-hook-form@workspace:."
   dependencies:
-    "@spencercreative/eslint-config": ^1.0.0
+    "@spencerlabs/eslint-config": ^1.0.0
     "@types/node": ^18.11.17
     "@types/react": ^18.0.26
     "@types/react-dom": ^18.0.9
