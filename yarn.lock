@@ -735,7 +735,7 @@ __metadata:
   resolution: "@spencerlabs/uswds-react-hook-form@workspace:."
   dependencies:
     "@spencerlabs/eslint-config": ^1.0.0
-    "@types/node": ^18.11.17
+    "@types/node": ^18.14.0
     "@types/react": ^18.0.26
     "@types/react-dom": ^18.0.9
     "@types/uswds__uswds": ^3.3.0
@@ -832,10 +832,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^18.11.17":
-  version: 18.11.17
-  resolution: "@types/node@npm:18.11.17"
-  checksum: 1933afd068d5c75c068c6c4df6d10edb3b0b2bb6503d544e2f0496ac007c90596e6a5e284a8ef032451bc16f871b7e46719d7d2bea60e9b25d13a77d52161cac
+"@types/node@npm:^18.14.0":
+  version: 18.14.0
+  resolution: "@types/node@npm:18.14.0"
+  checksum: d83fcf5e4ed544755dd9028f5cbb6b9d46235043159111bb2ad62223729aee581c0144a9f6df8ba73d74011db9ed4ebd7af2fd5e0996714e3beb508a5da8ac5c
   languageName: node
   linkType: hard
 
